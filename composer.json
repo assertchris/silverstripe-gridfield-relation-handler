@@ -1,7 +1,7 @@
 {
 	"name": "silverstripe/gridfield-relation-handler",
 	"description": "This module provides two GridField components that aid in managing relationships within SilverStripe.",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"license": "BSD-3-Clause",
 	"keywords": ["silverstripe", "gridfield", "component"],
 	"authors": [
@@ -12,6 +12,28 @@
 		}
 	],
 	"require": {
-		"silverstripe/framework": "~3.0"
-	}
+		"silverstripe/vendor-plugin": "^1.0",
+		"silverstripe/framework": "^4.0"
+	},
+    "extra": {
+        "installer-name": "gridfieldrelationhandler",
+        "expose": [
+            "javascript"
+        ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Firesphere\\GridFieldRelationHandler\\": "src/"
+        }
+    },
+    "scripts": {
+        "lint": "vendor/bin/phpcs src/ tests/",
+        "lint-clean": "vendor/bin/phpcbf src/ tests/"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

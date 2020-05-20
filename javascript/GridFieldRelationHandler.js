@@ -1,6 +1,6 @@
 jQuery(function($) {
 	$.entwine('ss', function($) {
-		$('.ss-gridfield .ss-gridfield-item .col-noedit').entwine({
+		$('.grid-field .ss-gridfield-item .col-noedit').entwine({
 			onclick: function(e) {
 				e.stopPropagation();
 				e.stopImmediatePropagation();
@@ -14,24 +14,25 @@ jQuery(function($) {
 				this.getGridField().setState('GridFieldRelationHandler', val);
 			},
 			onchange: function(e) {
-				var state = this.getState();
-				var input = $(e.target).closest('input');
-				if(input.hasClass('radio')) {
-					state.RelationVal = input.val();
-				} else if(input.hasClass('checkbox')) {
-					if(state.RelationVal.indexOf) {
-						if(input.is(':checked')) {
-							state.RelationVal.push(input.val());
+				let state = this.getState();
+				let input = $(e.target).closest('input');
+				let inputVal = parseInt(input.val())
+				if (input.hasClass('radio')) {
+					state.RelationVal = inputVal;
+				} else if (input.hasClass('checkbox')) {
+					if (state.RelationVal.indexOf) {
+						if (input.is(':checked')) {
+							state.RelationVal.push(inputVal);
 						} else {
-							var index = state.RelationVal.indexOf(input.val());
+							let index = state.RelationVal.indexOf(inputVal);
 							if(index != -1) {
-								var left = state.RelationVal.slice(0, index);
-								var right = state.RelationVal.slice(index+1);
+								let left = state.RelationVal.slice(0, index);
+								let right = state.RelationVal.slice(index + 1);
 								state.RelationVal = left.concat(right);
 							}
 						}
-					} else if(input.is(':checked')) {
-						state.RelationVal = [input.val()];
+					} else if (input.is(':checked')) {
+						state.RelationVal = [inputVal];
 					} else {
 						state.RelationVal = [];
 					}
@@ -43,22 +44,21 @@ jQuery(function($) {
 });
 
 if (!Array.prototype.indexOf) {
-	Array.prototype.indexOf = function(elt /*, from*/)
+	Array.prototype.indexOf = function(elt)
 	{
-		var len = this.length >>> 0;
+		let len = this.length >>> 0;
 
-		var from = Number(arguments[1]) || 0;
-		from = (from < 0)
-				 ? Math.ceil(from)
-				 : Math.floor(from);
-		if (from < 0)
+		let from = Number(arguments[1]) || 0;
+		from = (from < 0) ? Math.ceil(from) : Math.floor(from);
+		if (from < 0) {
 			from += len;
+		}
 
 		for (; from < len; from++)
 		{
-			if (from in this &&
-					this[from] === elt)
+			if (from in this && this[from] === elt) {
 				return from;
+			}
 		}
 		return -1;
 	};

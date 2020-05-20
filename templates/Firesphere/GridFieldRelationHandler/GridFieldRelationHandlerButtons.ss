@@ -1,5 +1,5 @@
 <div class="relationhandler">
-	<% loop Fields %>
+	<% loop $Fields %>
 		<span>$Me</span>
 	<% end_loop %>
 </div>
